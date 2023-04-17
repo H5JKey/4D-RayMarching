@@ -74,13 +74,13 @@ int main()
         ImGui::Begin("Menu", nullptr, ImGuiWindowFlags_NoMove + ImGuiWindowFlags_NoResize);
         {
             ImGui::Text("ID:"); {
-                if (ImGui::Button("Cube"))
+                if (ImGui::Button("HyperCube"))
                     obj.id = 0;
                 ImGui::SameLine();
-                if (ImGui::Button("Sphere"))
+                if (ImGui::Button("HyperSphere"))
                     obj.id = 1;
                 ImGui::SameLine();
-                if (ImGui::Button("Torus"))
+                if (ImGui::Button("DuoCylinder"))
                     obj.id = 2;
             }
             ImGui::Text("Size:"); {

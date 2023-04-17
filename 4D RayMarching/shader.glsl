@@ -44,12 +44,13 @@ void pR(inout vec2 p, float a) {
     p=cos(a)*p+sin(a)*vec2(p.y, -p.x);
 }
 
-float torusDist(vec4 p)
+
+float duoCylinderDist(vec4 p)
 {
   vec4 pos=vec4(posX,posY,posZ,posW);
-  vec2 q = vec2(length((p-pos).xzw)- 
-  size.x,(p-pos).y);
-  return length(q)-size.y;
+  p-=pos;
+  vec2 d = abs(vec2(length(p.xz),length(p.yw)))-size;
+  return min(max(d.x,d.y),0.0)+length(max(d,0.));
  }
 
 float cubeDist(vec4 p) {
@@ -81,7 +82,7 @@ float GetDist(vec3 p) {
     else if (id==0.0)
          dist=cubeDist(p4);
     else if (id==2.0)
-        dist=torusDist(p4);
+        dist=duoCylinderDist(p4);
          
     return dist;
 }
