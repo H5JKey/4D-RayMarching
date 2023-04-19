@@ -82,6 +82,9 @@ int main()
                 ImGui::SameLine();
                 if (ImGui::Button("DuoCylinder"))
                     obj.id = 2;
+                ImGui::SameLine();
+                if (ImGui::Button("HyperTous"))
+                    obj.id = 3;
             }
             ImGui::Text("Size:"); {
                 if (obj.id == 1 || obj.id == 0)

@@ -58,6 +58,14 @@ float cubeDist(vec4 p) {
    return max(abs(p.x-pos.x), max(abs(p.y-pos.y), max(abs(p.z-pos.z),abs(p.w-pos.w))))-size.x/2.0;
 }
 
+float torusDist(vec4 p)
+{
+
+  vec4 pos=vec4(posX,posY,posZ,posW);
+  p-=pos;
+  return length(vec3(abs(length(p.xy)-size.x),p.zw))-size.y;
+}
+
 
 float sphereDist(vec4 p)
 {
@@ -83,6 +91,8 @@ float GetDist(vec3 p) {
          dist=cubeDist(p4);
     else if (id==2.0)
         dist=duoCylinderDist(p4);
+    else if (id==3.0)
+        dist=torusDist(p4);
          
     return dist;
 }
