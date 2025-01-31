@@ -1,8 +1,8 @@
 ﻿#include <SFML/Graphics.hpp>
+#include <Windows.h>
 
 #include "Render.h"
 #include "User.h"
-
 
 #include "lib/imgui/imgui.h"
 #include "lib/imgui/imgui-SFML.h"
@@ -33,6 +33,8 @@ int main()
 
     sf::RenderWindow app(sf::VideoMode(), "4D", sf::Style::Fullscreen);
     ImGui::SFML::Init(app);
+    float factor = GetDpiForWindow(app.getSystemHandle()) / 96.f;
+    ImGui::GetIO().FontGlobalScale = factor;
     bool rotationXY=0, rotationXZ=0, rotationXW=0, rotationYZ=0, rotationYW=0, rotationZW=0;
     while (app.isOpen()) {
         sf::Event event;
@@ -71,7 +73,7 @@ int main()
         render.drawScene(obj, app, user, timer.getElapsedTime());
         
         ImGui::SFML::Update(app, dt);
-        ImGui::Begin("Menu", nullptr, ImGuiWindowFlags_NoMove + ImGuiWindowFlags_NoResize);
+        ImGui::Begin("Menu", nullptr);
         {
             ImGui::Text("ID:"); {
                 if (ImGui::Button("HyperCube"))
@@ -83,7 +85,7 @@ int main()
                 if (ImGui::Button("DuoCylinder"))
                     obj.id = 2;
                 ImGui::SameLine();
-                if (ImGui::Button("HyperTous"))
+                if (ImGui::Button("HyperTorus"))
                     obj.id = 3;
             }
             ImGui::Text("Size:"); {
